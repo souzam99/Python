@@ -73,21 +73,23 @@ import random
 
 class forca():
     def __init__ (self, palavra):
-        self.palavra = {}
+        self.palavra_letras = {}
         self.erros = 0
         self.palavras_certas = []
         self.palavras_erradas = []
         self.espacos = {}
         
+        self.palavra = palavra
+        
         num = 0
         for i in palavra:
-            self.palavra.update({num:i})
+            self.palavra_letras.update({num:i})
             self.espacos.update({num:"_"})
             num += 1
         
             
     def imprimir(self):
-        print("\n==================== JOOG DA FORCA ====================\n")
+        print("\n==================== JOGO DA FORCA ====================\n")
         print(forca_carcteres[self.erros])
         print('Palavra:')
         aux = ""
@@ -103,7 +105,7 @@ class forca():
         print(aux)
         
         aux = ""
-        print("Letras errdadas:")
+        print("Letras erradas:")
         for i in self.palavras_erradas:
             aux += i + " "
         print(aux)
@@ -119,7 +121,7 @@ class forca():
             print("A palavra já selecionada!\n")
             self.contabilizar_erro()
         else:
-            for k,i in self.palavra.items():
+            for k,i in self.palavra_letras.items():
                 if letra == i:
                     self.espacos[k] = i
                     encontrou = True
@@ -152,6 +154,7 @@ class forca():
     def testar_derrota(self):
         if self.erros > 6:
             print("\nVocê foi enforcado!")
+            print("\nA palavra era: %s" %(self.palavra))
             return True
         else:
             return False
